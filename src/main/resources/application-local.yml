@@ -13,8 +13,13 @@ server:
 #    basedir: /Users/hachangjin/IdeaProjects/sample-springboot-webservice/tomcatLogs
 
 spring:
+  devtools:
+    livereload:
+      enabled: true
+  thymeleaf:
+      cache: false
   datasource:
-    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/board_db?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/board?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: root
     password: gkckdwls12
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
