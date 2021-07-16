@@ -1,0 +1,36 @@
+server:
+  port: 8080
+#  tomcat:
+#    accesslog:
+#      directory: /Users/hachangjin/IdeaProjects/sample-springboot-webservice/tomcatLogs
+#      enabled: true
+#      file-date-format: .yyyy-MM-dd
+#      max-days: 14
+#      pattern: '%h %l %u %t "%r" %s %b %D'
+#      prefix: test_access
+#      rotate: true
+#      suffix: .log
+#    basedir: /Users/hachangjin/IdeaProjects/sample-springboot-webservice/tomcatLogs
+
+spring:
+  datasource:
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/board_db?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: gkckdwls12
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    hikari:
+      connection-timeout: 5000
+      validation-timeout: 1000
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-test-query: SELECT 1
+
+mybatis:
+  mapper-locations: mybatis/mapper/**/*.xml
+  configuration:
+    cache-enabled: true
+    lazy-loading-enabled: true
+    multiple-result-sets-enabled: true
+    use-column-label: false
+    default-statement-timeout: 65000
+    map-underscore-to-camel-case: true
