@@ -34,3 +34,15 @@ mybatis:
     use-column-label: false
     default-statement-timeout: 65000
     map-underscore-to-camel-case: true
+
+ogging:
+  level:
+    root: INFO
+    com.sample.board.sprinboot: DEBUG
+    jdbc.sqlonly: DEBUG
+    org.springframework.web: DEBUG
+    com.zaxxer.hikari.HikariDataSource: ERROR
+    jdbc.sqltiming: DEBUG
+    jdbc.resultsettable: DEBUG
+  file:
+    path: /logs
