@@ -3,6 +3,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.board.springboot.mapper.board.BoardMapper">
 
+    <insert id="insertBoard" parameterType="com.sample.board.springboot.web.dto.board.BoardRequestdDto" useGeneratedKeys="true" keyProperty="brNo" >
+        insert into board(
+            user_no,
+            title,
+            content,
+            del_yn,
+            frst_reg_date,
+            last_chg_date
+        ) values (
+            #{userNo},
+            #{title},
+            #{content},
+            'N',
+            now(),
+            now()
+        )
+    </insert>
+
     <select id="selectBoardList" resultType="com.sample.board.springboot.web.dto.board.BoardListResponseDto">
         select
             a.br_no,

@@ -2,10 +2,13 @@ package com.sample.board.springboot.service.board;
 
 import com.sample.board.springboot.mapper.board.BoardMapper;
 import com.sample.board.springboot.web.dto.board.BoardListResponseDto;
+import com.sample.board.springboot.web.dto.board.BoardRequestdDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,4 +32,20 @@ public class BoardService {
         return boardListResponseDto;
     }
 
+    @Transactional
+    public ResponseEntity<?> insertBoard(BoardRequestdDto boardRequestdDto) {
+        boardRequestdDto = BoardRequestdDto.builder()
+                .title(boardRequestdDto.getTitle())
+                .content(boardRequestdDto.getContent())
+                .userNo(1)
+                .build();
+
+        int affectRow = boardMapper.insertBoard(boardRequestdDto);
+        log.info("insertBoard :: {}", affectRow);
+        log.info("인서트후 getBrNo :: {}", boardRequestdDto.getBrNo());
+        log.info("인서트후 getBrNo :: {}", boardRequestdDto);
+
+        return affectRow > 0 ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+    }
 }
