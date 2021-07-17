@@ -11,4 +11,6 @@ public interface BoardMapper {
     List<BoardListResponseDto> selectBoardList();
 
     int insertBoard(BoardRequestdDto boardRequestdDto);
+
+    void insertBoardHistory(BoardRequestdDto boardRequestdDto);
 }

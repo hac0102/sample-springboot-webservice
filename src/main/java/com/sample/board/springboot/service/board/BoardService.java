@@ -41,9 +41,7 @@ public class BoardService {
                 .build();
 
         int affectRow = boardMapper.insertBoard(boardRequestdDto);
-        log.info("insertBoard :: {}", affectRow);
-        log.info("인서트후 getBrNo :: {}", boardRequestdDto.getBrNo());
-        log.info("인서트후 getBrNo :: {}", boardRequestdDto);
+        boardMapper.insertBoardHistory(boardRequestdDto);
 
         return affectRow > 0 ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 

@@ -30,7 +30,6 @@ public class BoardController {
     public ResponseEntity<?> insertBoard(@RequestBody BoardRequestdDto boardRequestdDto) {
         log.info("파람값 :: {}", boardRequestdDto);
         return boardService.insertBoard(boardRequestdDto);
-//        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }
