@@ -4,7 +4,6 @@ import com.sample.board.springboot.service.board.BoardService;
 import com.sample.board.springboot.web.dto.board.BoardRequestdDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +27,6 @@ public class BoardController {
 
     @PostMapping("/board")
     public ResponseEntity<?> insertBoard(@RequestBody BoardRequestdDto boardRequestdDto) {
-        log.info("파람값 :: {}", boardRequestdDto);
         return boardService.insertBoard(boardRequestdDto);
     }
 
