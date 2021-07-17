@@ -1,0 +1,58 @@
+<th:block th:fragment="f_board_detail_modal" id="detailDiv" >
+    <div class="portfolio-modal modal fade" id="boardDetailModal" tabindex="-1" aria-labelledby="boardDetailModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">상세페이지</h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8 col-xl-7">
+                                        <!-- * * * * * * * * * * * * * * *-->
+                                        <!-- * * SB Forms Contact Form * *-->
+                                        <!-- * * * * * * * * * * * * * * *-->
+                                        <!-- This form is pre-integrated with SB Forms.-->
+                                        <!-- To make this form functional, sign up at-->
+                                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                                        <!-- to get an API token!-->
+                                        <form id="boardDetailForm">
+                                            <!-- Name input-->
+                                            <div id="testDiv">
+                                                <div th:each="detail :${boardDetailData}">
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="brDtlTitle" type="text" th:value="${detail.title}" disabled="disabled" readonly="readonly"  />
+                                                        <label for="brDtlTitle">제 목</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="brDtlName" type="text" th:value="${detail.UserDto.name}" disabled="disabled" readonly="readonly"  />
+                                                        <label for="brDtlName">작성자</label>
+                                                    </div>
+                                                    <!-- Message input-->
+                                                    <div class="form-floating mb-3">
+                                                        <textarea class="form-control" id="brDtlContent" type="text" th:text="${detail.content}" disabled="disabled" readonly="readonly"></textarea>
+                                                        <label for="brDtlContent">내 용</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Submit Button-->
+                                            <button type="button" class="btn btn-primary btn-xl" id="brUpdateBtn">수정</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

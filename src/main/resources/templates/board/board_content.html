@@ -14,7 +14,7 @@
             </div>
             <!-- Portfolio Grid Items-->
             <div class="row justify-content-center">
-                <table>
+                <table id="boardTable" class="table table-hover">
                     <colgroup>
                         <col style="width:10%;" />
                         <col style="width:auto;" />
@@ -35,7 +35,7 @@
                         </tr>
                         <th:block th:unless="${#lists.size(boardDataList) == 0}">
                             <th:block th:each="board : ${boardDataList}">
-                                <tr>
+                                <tr th:selBrNo="${board.brNo}" data-bs-toggle="modal" data-bs-target="#boardDetailModal">
                                     <td th:brNo="${board.brNo}" th:text="${board.brNo}" th:value="${board.brNo}"></td>
                                     <td th:text="${board.title}" th:value="${board.title}"></td>
                                     <td th:text="${board.name}" th:value="${board.name}"></td>
