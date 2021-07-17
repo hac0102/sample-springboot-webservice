@@ -1,14 +1,12 @@
 package com.sample.board.springboot.web.board;
 
 import com.sample.board.springboot.service.board.BoardService;
+import com.sample.board.springboot.web.dto.board.Board;
 import com.sample.board.springboot.web.dto.board.BoardRequestdDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RequiredArgsConstructor
@@ -28,6 +26,12 @@ public class BoardController {
     @PostMapping("/board")
     public ResponseEntity<?> insertBoard(@RequestBody BoardRequestdDto boardRequestdDto) {
         return boardService.insertBoard(boardRequestdDto);
+    }
+
+    @GetMapping("/board/{brNo}")
+    public ModelAndView getBoadrdDetailData(@PathVariable int brNo) {
+        log.info("brNobrNo :: {}", brNo);
+        return boardService.getBoardDetailData(brNo);
     }
 
 }

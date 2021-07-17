@@ -1,6 +1,7 @@
 package com.sample.board.springboot.service.board;
 
 import com.sample.board.springboot.mapper.board.BoardMapper;
+import com.sample.board.springboot.web.dto.board.Board;
 import com.sample.board.springboot.web.dto.board.BoardListResponseDto;
 import com.sample.board.springboot.web.dto.board.BoardRequestdDto;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,5 +47,10 @@ public class BoardService {
 
         return affectRow > 0 ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
+    }
+
+    public ModelAndView getBoardDetailData(int brNo) {
+        return new ModelAndView("board/board_detail_modal :: #testDiv",
+                "boardDetailData", boardMapper.selectBoardDetailData(brNo));
     }
 }

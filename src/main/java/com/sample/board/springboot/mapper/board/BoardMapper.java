@@ -1,5 +1,6 @@
 package com.sample.board.springboot.mapper.board;
 
+import com.sample.board.springboot.web.dto.board.Board;
 import com.sample.board.springboot.web.dto.board.BoardListResponseDto;
 import com.sample.board.springboot.web.dto.board.BoardRequestdDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,4 +14,6 @@ public interface BoardMapper {
     int insertBoard(BoardRequestdDto boardRequestdDto);
 
     void insertBoardHistory(BoardRequestdDto boardRequestdDto);
+
+    Board selectBoardDetailData(int brNo);
 }

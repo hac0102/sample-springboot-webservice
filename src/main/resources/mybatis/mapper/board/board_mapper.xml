@@ -2,6 +2,39 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.board.springboot.mapper.board.BoardMapper">
+    <resultMap id="BoardDtoMap" type="com.sample.board.springboot.web.dto.board.Board">
+        <result column="br_no" property="brNo"></result>
+        <result column="title" property="title"></result>
+        <result column="content" property="content"></result>
+        <result column="frst_reg_date" property="frstRegDate"></result>
+        <result column="last_chg_date" property="lastChgDate"></result>
+        <collection property="userDto" resultMap="UserDtoMap"></collection>
+
+    </resultMap>
+
+    <resultMap id="UserDtoMap" type="com.sample.board.springboot.web.dto.user.UserDto">
+        <result column="user_no" property="userNo"></result>
+        <result column="name"  property="name"></result>
+    </resultMap>
+
+<!--    <select id="selectBoardDetailData" parameterType="int" resultType="com.sample.board.springboot.web.dto.board.Board">-->
+    <select id="selectBoardDetailData" parameterType="int" resultMap="BoardDtoMap">
+        select
+            a.br_no,
+            b.user_no,
+            b.name,
+            a.title,
+            a.content,
+            a.frst_reg_date,
+            a.last_chg_date
+        from
+            board a inner join user b
+            on a.user_no = b.user_no
+        where
+            a.br_no = #{brNo}
+            and a.del_yn = 'N'
+        order by 1 desc;
+    </select>
 
     <insert id="insertBoardHistory" parameterType="com.sample.board.springboot.web.dto.board.BoardRequestdDto">
         insert into board_hst(

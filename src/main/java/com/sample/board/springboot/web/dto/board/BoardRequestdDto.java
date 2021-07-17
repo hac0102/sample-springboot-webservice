@@ -23,12 +23,12 @@ public class BoardRequestdDto {
         this.userNo = userNo;
     }
 
-    public Board toEntity() {
-        return Board.builder()
-                .brNo(brNo)
-                .title(title)
-                .content(content)
-                .build();
-    }
+//    public Board toEntity() {
+//        return Board.builder()
+//                .brNo(brNo)
+//                .title(title)
+//                .content(content)
+//                .build();
+//    }
 
 }
