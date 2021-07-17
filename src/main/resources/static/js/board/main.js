@@ -1,8 +1,3 @@
-
-console.log("board메인 js");
-console.log("board메인 js :: ", boardList);
-
-
 let board = {
     init : function() {
         let _this = this;
@@ -18,35 +13,26 @@ let board = {
         const sendData = {};
         sendData["title"] = document.querySelector('#brTitle').value;
         sendData["content"] = document.querySelector('#brContent').value;
-        console.log("sendData :: ", sendData);
-        dataSend(sendData, "POST", url);
-
+        dataSendPost(url, sendData, "POST");
     }
-
 };
 
 board.init();
 
-function dataSend(data, method, url) {
-    let res = fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if(response.status != 200){
-            alert("글등록 실패");
-            return null;
-        }
-        window.location.href = "/";
-    })
-//    .then(result => {
-//        window.location.href = "/";
-//    })
 
-//    let result = await res.json();
+async function dataSendPost(url, data, method) {
+    fetch(url, {
+        method : method,
+        headers : {
+            "content-Type" : "application/json",
+        },
+        body : JSON.stringify(data)
+        })
+        .then((res) => res.status === 200 ? window.location.href = "/" : errMsg(res) )
 }
 
-
+function errMsg(err) {
+    alert("API 호출 실패");
+    console.log("status code :: ", err.status);
+    return null;
+}
