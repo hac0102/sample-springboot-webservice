@@ -13,13 +13,15 @@ public class BoardRequestdDto {
     private int brNo;
     private String title;
     private String content;
+    private String delYn;
     private int userNo;
 
     @Builder
-    public BoardRequestdDto(int brNo, String title, String content, int userNo) {
+    public BoardRequestdDto(int brNo, String title, String content, String delYn, int userNo) {
         this.brNo = brNo;
         this.title = title;
         this.content = content;
+        this.delYn = delYn;
         this.userNo = userNo;
     }
 

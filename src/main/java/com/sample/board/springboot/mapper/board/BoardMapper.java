@@ -18,4 +18,6 @@ public interface BoardMapper {
     Board selectBoardDetailData(int brNo);
 
     int updateBoard(BoardRequestdDto boardRequestdDto);
+
+    int deleteBoard(BoardRequestdDto boardRequestdDto);
 }

@@ -18,6 +18,15 @@
     </resultMap>
 
 
+    <update id="deleteBoard" parameterType="com.sample.board.springboot.web.dto.board.BoardRequestdDto">
+        update board
+        set
+            del_yn = #{delYn},
+            last_chg_date = now()
+        where
+            br_no = #{brNo}
+    </update>
+
     <update id="updateBoard" parameterType="com.sample.board.springboot.web.dto.board.BoardRequestdDto">
         update board
         set
@@ -62,7 +71,7 @@
             #{userNo},
             #{title},
             #{content},
-            'N',
+            #{delYn},
             now(),
             now()
         )

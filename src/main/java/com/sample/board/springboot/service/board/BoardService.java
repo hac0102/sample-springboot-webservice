@@ -39,6 +39,7 @@ public class BoardService {
         boardRequestdDto = BoardRequestdDto.builder()
                 .title(boardRequestdDto.getTitle())
                 .content(boardRequestdDto.getContent())
+                .delYn("N")
                 .userNo(1)
                 .build();
 
@@ -60,10 +61,27 @@ public class BoardService {
                 .brNo(boardRequestdDto.getBrNo())
                 .title(boardRequestdDto.getTitle())
                 .content(boardRequestdDto.getContent())
+                .delYn("N")
                 .userNo(1)
                 .build();
 
         int affectRow = boardMapper.updateBoard(boardRequestdDto);
+        boardMapper.insertBoardHistory(boardRequestdDto);
+
+        return affectRow > 0 ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @Transactional
+    public ResponseEntity<?> deleteBoard(BoardRequestdDto boardRequestdDto) {
+        boardRequestdDto = BoardRequestdDto.builder()
+                .brNo(boardRequestdDto.getBrNo())
+                .title(boardRequestdDto.getTitle())
+                .content(boardRequestdDto.getContent())
+                .delYn("Y")
+                .userNo(1)
+                .build();
+
+        int affectRow = boardMapper.deleteBoard(boardRequestdDto);
         boardMapper.insertBoardHistory(boardRequestdDto);
 
         return affectRow > 0 ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
