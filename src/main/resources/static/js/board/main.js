@@ -1,6 +1,8 @@
 let board = {
     init : function() {
         let _this = this;
+        let url;
+        let sendFormData;
 
         document.querySelector('#brSaveBtn').addEventListener('click', () => {
             _this.insertBoard();
@@ -20,11 +22,15 @@ let board = {
             _this.updateBoard();
         });
 
+        document.querySelector("#brDeleteBtn").addEventListener('click', (e) => {
+            _this.deleteBoard();
+        });
+
 
     },
 
     insertBoard : function() {
-        let url = '/board';
+        url = '/board';
         const sendData = {};
         sendData["title"] = document.querySelector('#brTitle').value;
         sendData["content"] = document.querySelector('#brContent').value;
@@ -32,19 +38,23 @@ let board = {
     },
 
     getBoardDetailData : function(selBrNo) {
-        let url = '/board/'
+        url = '/board/'
         getDetailData(url, selBrNo)
     },
 
     updateBoard() {
-        let url = '/board';
+        url = '/board';
         const sendData = {};
         sendData["brNo"] = document.querySelector('#brDtlBrNo').value;
         sendData["title"] = document.querySelector('#brDtlTitle').value;
         sendData["content"] = document.querySelector('#brDtlContent').value;
         dataSendPost(url, sendData, "PUT");
-    }
+    },
 
+    deleteBoard() {
+        url = '/board';
+        dataSendPost(url, getBoardDetailFormData(), "DELETE");
+    }
 };
 
 board.init();
@@ -65,8 +75,6 @@ async function getDetailData(url, brNo){
 }
 
 
-
-
 async function dataSendPost(url, data, method) {
     fetch(url, {
         method : method,
@@ -75,7 +83,16 @@ async function dataSendPost(url, data, method) {
         },
         body : JSON.stringify(data)
         })
-        .then((res) => res.status === 200 ? pageReset(true) : errMsg(res) )
+        .then((res) =>  {return res.status === 200 ? pageReset(true) : null})
+        .catch(err => errMsg(err))
+}
+
+function getBoardDetailFormData(){
+    const formData = {};
+    formData["brNo"] = document.querySelector('#brDtlBrNo').value;
+    formData["title"] = document.querySelector('#brDtlTitle').value;
+    formData["content"] = document.querySelector('#brDtlContent').value;
+    return formData;
 }
 
 function pageReset(flag){
@@ -92,5 +109,6 @@ function btnChgFormFiled(flag){
     document.getElementById("brDtlTitle").disabled = flag === "update" ? false : true;
     document.getElementById("brDtlContent").disabled = flag === "update" ? false : true;
     document.querySelector("#brUpdateBtn").style.display = flag === "update" ? "none" : "";
+    document.querySelector("#brDeleteBtn").style.display = flag === "update" ? "none" : "";
     document.querySelector("#brUpdateSaveBtn").style.display = flag === "update" ? "" : "none";
 }
