@@ -31,6 +31,7 @@ public class IndexController {
         }
 
         mv.addObject("boardDataList", boardService.getBoardList());
+        mv.addObject("userInfo", user);
         mv.setViewName("main");
         return mv;
     }
@@ -40,8 +41,8 @@ public class IndexController {
         log.info("로그아웃 name :: {}", user == null ? "null" : user.getName());
         log.info("로그아웃 email :: {}", user == null ? "null" : user.getEmail());
 
-//        httpSession.setAttribute("user", null);
         httpSession.removeAttribute("userSession");
+        httpSession.invalidate();
         user = null;
         mv.setViewName("login");
         return mv;
