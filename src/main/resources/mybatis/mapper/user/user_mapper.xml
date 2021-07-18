@@ -24,8 +24,8 @@
         )
         ON DUPLICATE KEY UPDATE
             email_addr = #{emailAddr}
-<!--        <selectKey keyProperty="userNo" resultType="com.sample.board.springboot.web.dto.user.UserDto" order="AFTER">-->
-        <selectKey keyProperty="userNo" resultType="int" order="AFTER">
+        <selectKey keyProperty="userNo" resultType="com.sample.board.springboot.web.dto.user.UserDto" order="AFTER">
+<!--        <selectKey keyProperty="userNo" resultType="int" order="AFTER">-->
             select
                 user_no
             from

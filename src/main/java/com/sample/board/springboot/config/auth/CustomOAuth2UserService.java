@@ -49,14 +49,25 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
 
+    private void setUserSession(UserDto user) {
+    }
+
     @Transactional
     private UserDto saveOrUdate(OAuthAttributes attributes) {
 //        UserDto userDto = userMapper.selectUserInfo(attributes.toEntity())
 //                .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
 //                .orElse(attributes.toEntity());
-        userMapper.insertUserJoin(attributes.toEntity());
-        userMapper.insertUserJoinHistory(attributes.toEntity());
+        UserDto user = UserDto.builder()
+                .emailAddr(attributes.toEntity().getEmailAddr())
+                .name(attributes.toEntity().getName())
+                .joinType(attributes.toEntity().getJoinType())
+                .picture(attributes.toEntity().getPicture())
+                .userRole(attributes.toEntity().getUserRole())
+                .build();
 
-        return attributes.toEntity();
+        userMapper.insertUserJoin(user);
+        userMapper.insertUserJoinHistory(user);
+
+        return user;
     }
 }
