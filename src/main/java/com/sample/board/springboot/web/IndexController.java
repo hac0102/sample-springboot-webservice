@@ -23,12 +23,7 @@ public class IndexController {
 
     @GetMapping("/")
     public ModelAndView main(@LoginUser SessionUser user) throws Exception {
-//        @LoginUser SessionUser user
         ModelAndView mv = new ModelAndView();
-        log.info("여기는 옴?????");
-
-
-//        UserDto user = (UserDto) httpSession.getAttribute("userSession");
 
         if(user == null){
             mv.setViewName("login");
@@ -37,6 +32,18 @@ public class IndexController {
 
         mv.addObject("boardDataList", boardService.getBoardList());
         mv.setViewName("main");
+        return mv;
+    }
+
+    @GetMapping("/logout2")
+    public ModelAndView logout(ModelAndView mv, @LoginUser SessionUser user){
+        log.info("로그아웃 name :: {}", user == null ? "null" : user.getName());
+        log.info("로그아웃 email :: {}", user == null ? "null" : user.getEmail());
+
+//        httpSession.setAttribute("user", null);
+        httpSession.removeAttribute("userSession");
+        user = null;
+        mv.setViewName("login");
         return mv;
     }
 }
