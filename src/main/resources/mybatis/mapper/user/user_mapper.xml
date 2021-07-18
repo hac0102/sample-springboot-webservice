@@ -54,7 +54,7 @@
             , user_role
             , picture
             , frst_reg_date
-            , last_chg_date
+            , now()
         from
             user
         where
