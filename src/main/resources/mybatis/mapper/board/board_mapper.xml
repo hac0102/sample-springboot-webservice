@@ -99,7 +99,7 @@
         select
             a.br_no,
             a.title,
-            b.name,
+            ifnull(b.name, '탈퇴사용자') name,
             a.del_yn,
             a.frst_reg_date,
             a.last_chg_date
