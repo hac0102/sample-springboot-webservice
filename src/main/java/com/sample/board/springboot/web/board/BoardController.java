@@ -16,30 +16,30 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/board")
+    @GetMapping("/api/v1/board")
     public ModelAndView getBoardList() throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.addObject("boardDataList", boardService.getBoardList());
         return mv;
     }
 
-    @PostMapping("/board")
+    @PostMapping("/api/v1/board")
     public ResponseEntity<?> insertBoard(@RequestBody BoardRequestdDto boardRequestdDto) {
         return boardService.insertBoard(boardRequestdDto);
     }
 
-    @GetMapping("/board/{brNo}")
+    @GetMapping("/api/v1/board/{brNo}")
     public ModelAndView getBoadrdDetailData(@PathVariable int brNo) {
         log.info("brNobrNo :: {}", brNo);
         return boardService.getBoardDetailData(brNo);
     }
 
-    @PutMapping("/board")
+    @PutMapping("/api/v1/board")
     public ResponseEntity<?> updateBoard(@RequestBody BoardRequestdDto boardRequestdDto) {
         return boardService.updateBoard(boardRequestdDto);
     }
 
-    @DeleteMapping("/board")
+    @DeleteMapping("/api/v1/board")
     public ResponseEntity<?> deleteBoard(@RequestBody BoardRequestdDto boardRequestdDto) {
         return boardService.deleteBoard(boardRequestdDto);
     }

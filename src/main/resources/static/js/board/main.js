@@ -30,7 +30,7 @@ let board = {
     },
 
     insertBoard : function() {
-        url = '/board';
+        url = '/api/v1/board';
         const sendData = {};
         sendData["title"] = document.querySelector('#brTitle').value;
         sendData["content"] = document.querySelector('#brContent').value;
@@ -38,12 +38,12 @@ let board = {
     },
 
     getBoardDetailData : function(selBrNo) {
-        url = '/board/'
+        url = '/api/v1/board/'
         getDetailData(url, selBrNo)
     },
 
     updateBoard() {
-        url = '/board';
+        url = '/api/v1/board';
         const sendData = {};
         sendData["brNo"] = document.querySelector('#brDtlBrNo').value;
         sendData["title"] = document.querySelector('#brDtlTitle').value;
@@ -52,7 +52,7 @@ let board = {
     },
 
     deleteBoard() {
-        url = '/board';
+        url = '/api/v1/board';
         dataSendPost(url, getBoardDetailFormData(), "DELETE");
     }
 };
