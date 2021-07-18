@@ -21,7 +21,8 @@ public class UserDto {
     private String picture;
 
     @Builder
-    public UserDto(String name, String emailAddr, String joinType, String phoneNo, Role userRole, String picture, LocalDateTime frstRegDate, LocalDateTime lastChgDate) {
+    public UserDto(int userNo, String name, String emailAddr, String joinType, String phoneNo, Role userRole, String picture, LocalDateTime frstRegDate, LocalDateTime lastChgDate) {
+        this.userNo = userNo;
         this.name = name;
         this.emailAddr = emailAddr;
         this.joinType = joinType;

@@ -29,7 +29,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        log.info("aaaaaaaaaaa 111111");
+
         OAuth2UserService delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
@@ -39,7 +39,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         UserDto user = saveOrUdate(attributes);
-        log.info("aaaaaaaaaaa");
 
         httpSession.setAttribute("userSession", new SessionUser(user));
 
@@ -55,7 +54,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 //        UserDto userDto = userMapper.selectUserInfo(attributes.toEntity())
 //                .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
 //                .orElse(attributes.toEntity());
-
         userMapper.insertUserJoin(attributes.toEntity());
         userMapper.insertUserJoinHistory(attributes.toEntity());
 

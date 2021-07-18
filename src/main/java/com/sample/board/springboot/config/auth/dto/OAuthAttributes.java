@@ -18,6 +18,7 @@ public class OAuthAttributes {
     private String email;
     private String picture;
     private String type;
+    private int userNo;
 
 
     @Builder
@@ -81,7 +82,7 @@ public class OAuthAttributes {
                 .picture(picture)
                 .userRole(Role.USER)
                 .joinType(type)
+                .userNo(userNo)
                 .build();
     }
-
 }

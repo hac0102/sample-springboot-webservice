@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sample.board.springboot.mapper.user.UserMapper">
 
-<!--    <insert id="insertUserJoin" parameterType="com.sample.board.springboot.web.dto.user.UserDto" useGeneratedKeys="true" keyColumn="user_no" keyProperty="userNo">-->
+<!--    <insert id="insertUserJoin" parameterType="com.sample.board.springboot.web.dto.user.UserDto" useGeneratedKeys="true"   keyProperty="userNo">-->
     <insert id="insertUserJoin" parameterType="com.sample.board.springboot.web.dto.user.UserDto">
         insert IGNORE into user (
             name
@@ -24,34 +24,61 @@
         )
         ON DUPLICATE KEY UPDATE
             email_addr = #{emailAddr}
-<!--        <selectKey keyColumn="user_no" keyProperty="userNo" resultType="int" order="AFTER">-->
-<!--            select-->
-<!--                user_no-->
-<!--            from-->
-<!--                user-->
-<!--            where-->
-<!--                email_addr = #{emailAddr}-->
-<!--        </selectKey>-->
+<!--        <selectKey keyProperty="userNo" resultType="com.sample.board.springboot.web.dto.user.UserDto" order="AFTER">-->
+        <selectKey keyProperty="userNo" resultType="int" order="AFTER">
+            select
+                user_no
+            from
+                user
+            where
+                email_addr = #{emailAddr}
+        </selectKey>
     </insert>
 
     <insert id="insertUserJoinHistory" parameterType="com.sample.board.springboot.web.dto.user.UserDto">
         insert into user_login_hst (
-            name
+            user_no
+            , name
             , email_addr
             , join_type
             , user_role
             , picture
             , frst_reg_date
             , last_chg_date
-        ) values (
-            #{name}
-            , #{emailAddr}
-            , #{joinType}
-            , #{userRole}
-            , #{picture}
-            , now()
-            , now()
-        )
+            )
+        select
+            user_no
+            , name
+            , email_addr
+            , join_type
+            , user_role
+            , picture
+            , frst_reg_date
+            , last_chg_date
+        from
+            user
+        where
+            email_addr = #{emailAddr}
+
+<!--        insert into user_login_hst (-->
+<!--            user_no-->
+<!--            , name-->
+<!--            , email_addr-->
+<!--            , join_type-->
+<!--            , user_role-->
+<!--            , picture-->
+<!--            , frst_reg_date-->
+<!--            , last_chg_date-->
+<!--        ) values (-->
+<!--            #{userNo}-->
+<!--            , #{name}-->
+<!--            , #{emailAddr}-->
+<!--            , #{joinType}-->
+<!--            , #{userRole}-->
+<!--            , #{picture}-->
+<!--            , now()-->
+<!--            , now()-->
+<!--        )-->
     </insert>
 
 </mapper>
