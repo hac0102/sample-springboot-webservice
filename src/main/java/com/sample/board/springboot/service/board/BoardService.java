@@ -48,9 +48,12 @@ public class BoardService {
 
     }
 
-    public ModelAndView getBoardDetailData(int brNo) {
-        return new ModelAndView("board/board_detail_modal :: #testDiv",
-                "boardDetailData", boardMapper.selectBoardDetailData(brNo));
+    public ModelAndView getBoardDetailData(int brNo, SessionUser userInfo) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("board/board_detail_modal :: #testDiv");
+        mv.addObject("boardDetailData", boardMapper.selectBoardDetailData(brNo));
+        mv.addObject("userInfo", userInfo);
+        return mv;
     }
 
     @Transactional

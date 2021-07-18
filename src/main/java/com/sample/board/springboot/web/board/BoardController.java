@@ -30,8 +30,8 @@ public class BoardController {
     }
 
     @GetMapping("/api/v1/board/{brNo}")
-    public ModelAndView getBoadrdDetailData(@PathVariable int brNo) {
-        return boardService.getBoardDetailData(brNo);
+    public ModelAndView getBoadrdDetailData(@PathVariable int brNo, @LoginUser SessionUser userInfo) {
+        return boardService.getBoardDetailData(brNo, userInfo);
     }
 
     @PutMapping("/api/v1/board")
