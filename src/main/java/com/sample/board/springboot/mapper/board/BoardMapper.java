@@ -16,4 +16,6 @@ public interface BoardMapper {
     void insertBoardHistory(BoardRequestdDto boardRequestdDto);
 
     Board selectBoardDetailData(int brNo);
+
+    int updateBoard(BoardRequestdDto boardRequestdDto);
 }

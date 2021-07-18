@@ -53,4 +53,19 @@ public class BoardService {
         return new ModelAndView("board/board_detail_modal :: #testDiv",
                 "boardDetailData", boardMapper.selectBoardDetailData(brNo));
     }
+
+    @Transactional
+    public ResponseEntity<?> updateBoard(BoardRequestdDto boardRequestdDto) {
+        boardRequestdDto = BoardRequestdDto.builder()
+                .brNo(boardRequestdDto.getBrNo())
+                .title(boardRequestdDto.getTitle())
+                .content(boardRequestdDto.getContent())
+                .userNo(1)
+                .build();
+
+        int affectRow = boardMapper.updateBoard(boardRequestdDto);
+        boardMapper.insertBoardHistory(boardRequestdDto);
+
+        return affectRow > 0 ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }

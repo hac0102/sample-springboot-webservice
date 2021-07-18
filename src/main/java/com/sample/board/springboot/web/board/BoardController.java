@@ -34,4 +34,9 @@ public class BoardController {
         return boardService.getBoardDetailData(brNo);
     }
 
+    @PutMapping("/board")
+    public ResponseEntity<?> updateBoard(@RequestBody BoardRequestdDto boardRequestdDto) {
+        return boardService.updateBoard(boardRequestdDto);
+    }
+
 }

@@ -17,6 +17,18 @@
         <result column="name"  property="name"></result>
     </resultMap>
 
+
+    <update id="updateBoard" parameterType="com.sample.board.springboot.web.dto.board.BoardRequestdDto">
+        update board
+        set
+            title = #{title},
+            content = #{content},
+            last_chg_date = now()
+        where
+            br_no = #{brNo} and
+            user_no = #{userNo}
+    </update>
+
 <!--    <select id="selectBoardDetailData" parameterType="int" resultType="com.sample.board.springboot.web.dto.board.Board">-->
     <select id="selectBoardDetailData" parameterType="int" resultMap="BoardDtoMap">
         select
