@@ -9,7 +9,7 @@
 <th:block th:insert="board/board_content :: f_content"></th:block>
 <th:block th:insert="layout/layout :: f_footer"></th:block>
 <th:block th:insert="board/board_write_modal :: f_board_write_modal"></th:block>
-<th:block th:insert="board/board_detail_modal :: f_board_detail_modal" ></th:block>
+<th:block th:replace="board/board_detail_modal :: f_board_detail_modal" ></th:block>
 
 <script defer th:inline="javascript">
         /*<![CDATA[*/

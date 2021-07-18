@@ -42,12 +42,14 @@
                                                         <textarea class="form-control" id="brDtlContent" type="text" th:text="${detail.content}" disabled="disabled" ></textarea>
                                                         <label for="brDtlContent">내 용</label>
                                                     </div>
+
+                                                    <th:block th:if="${userInfo.userNo} == ${detail.UserDto.userNo}">
+                                                        <button type="button" class="btn btn-outline-primary" id="brUpdateBtn">수정</button>
+                                                        <button type="button" class="btn btn-outline-success" id="brUpdateSaveBtn" style="display:none;">저장</button>
+                                                        <button type="button" class="btn btn-outline-danger" id="brDeleteBtn">삭제</button>
+                                                    </th:block>
                                                 </div>
                                             </div>
-                                            <!-- Submit Button-->
-                                            <button type="button" class="btn btn-outline-primary" id="brUpdateBtn">수정</button>
-                                            <button type="button" class="btn btn-outline-success" id="brUpdateSaveBtn" style="display:none;">저장</button>
-                                            <button type="button" class="btn btn-outline-danger" id="brDeleteBtn">삭제</button>
                                         </form>
                                     </div>
                                 </div>

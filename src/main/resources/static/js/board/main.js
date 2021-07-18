@@ -9,22 +9,39 @@ let board = {
         });
 
         document.querySelector("#boardTable").addEventListener('click', (e) => {
+            let el = document.querySelector("#boardTable");
             let selBrNo = e.target.closest("tr").getAttribute("selBrNo");
             if(selBrNo == null) return null;
             _this.getBoardDetailData(selBrNo);
-        });
 
-        document.querySelector("#brUpdateBtn").addEventListener('click', (e) => {
-            btnChgFormFiled("update");
-        });
+        }, false);
 
-        document.querySelector("#brUpdateSaveBtn").addEventListener('click', (e) => {
-            _this.updateBoard();
-        });
+        document.querySelector("#boardDetailForm").addEventListener('click', (e) => {
+            let attr = e.target.getAttribute("id");
+            if(attr === "brUpdateBtn"){
+                btnChgFormFiled("update");
+                return;
+            }
 
-        document.querySelector("#brDeleteBtn").addEventListener('click', (e) => {
-            _this.deleteBoard();
-        });
+            if(attr === "brUpdateSaveBtn"){
+                _this.updateBoard();
+                return;
+            }
+
+            if(attr === "brDeleteBtn"){
+                _this.deleteBoard();
+                return;
+            }
+
+        }, false);
+
+//        document.querySelector("#brUpdateSaveBtn").addEventListener('click', (e) => {
+//            _this.updateBoard();
+//        }, false);
+
+//        document.querySelector("#brDeleteBtn").addEventListener('click', (e) => {
+//            _this.deleteBoard();
+//        }, false);
 
 
     },
@@ -65,6 +82,7 @@ async function getDetailData(url, brNo){
         return res.status != 200 ? null : res.text();
     })
     .then((data) => {
+        document.querySelector("#testDiv").innerHTML = "";
         document.querySelector("#testDiv").innerHTML = data;
         btnChgFormFiled("detail");
     })
@@ -100,7 +118,7 @@ function pageReset(flag){
 }
 
 function errMsg(err) {
-    alert("API 호출 실패");
+//    alert("API 호출 실패");
     console.log("status code :: ", err.status);
     return null;
 }
@@ -112,3 +130,4 @@ function btnChgFormFiled(flag){
     document.querySelector("#brDeleteBtn").style.display = flag === "update" ? "none" : "";
     document.querySelector("#brUpdateSaveBtn").style.display = flag === "update" ? "" : "none";
 }
+
