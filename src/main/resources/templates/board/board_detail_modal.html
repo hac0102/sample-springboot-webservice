@@ -28,23 +28,25 @@
                                             <!-- Name input-->
                                             <div id="testDiv">
                                                 <div th:each="detail :${boardDetailData}">
+                                                    <input type="hidden" id="brDtlBrNo" th:value="${detail.brNo}" />
                                                     <div class="form-floating mb-3">
-                                                        <input class="form-control" id="brDtlTitle" type="text" th:value="${detail.title}" disabled="disabled" readonly="readonly"  />
+                                                        <input class="form-control" id="brDtlTitle" type="text" th:value="${detail.title}" disabled="disabled"  />
                                                         <label for="brDtlTitle">제 목</label>
                                                     </div>
                                                     <div class="form-floating mb-3">
-                                                        <input class="form-control" id="brDtlName" type="text" th:value="${detail.UserDto.name}" disabled="disabled" readonly="readonly"  />
+                                                        <input class="form-control" id="brDtlName" type="text" th:value="${detail.UserDto.name}" disabled="disabled" />
                                                         <label for="brDtlName">작성자</label>
                                                     </div>
                                                     <!-- Message input-->
                                                     <div class="form-floating mb-3">
-                                                        <textarea class="form-control" id="brDtlContent" type="text" th:text="${detail.content}" disabled="disabled" readonly="readonly"></textarea>
+                                                        <textarea class="form-control" id="brDtlContent" type="text" th:text="${detail.content}" disabled="disabled" ></textarea>
                                                         <label for="brDtlContent">내 용</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- Submit Button-->
                                             <button type="button" class="btn btn-primary btn-xl" id="brUpdateBtn">수정</button>
+                                            <button type="button" class="btn btn-primary btn-xl" id="brUpdateSaveBtn" style="display:none;">저장</button>
                                         </form>
                                     </div>
                                 </div>

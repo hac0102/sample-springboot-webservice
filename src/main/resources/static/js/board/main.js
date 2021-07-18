@@ -9,9 +9,17 @@ let board = {
         document.querySelector("#boardTable").addEventListener('click', (e) => {
             let selBrNo = e.target.closest("tr").getAttribute("selBrNo");
             if(selBrNo == null) return null;
-            console.log(_this);
             _this.getBoardDetailData(selBrNo);
-        })
+        });
+
+        document.querySelector("#brUpdateBtn").addEventListener('click', (e) => {
+            btnChgFormFiled("update");
+        });
+
+        document.querySelector("#brUpdateSaveBtn").addEventListener('click', (e) => {
+            _this.updateBoard();
+        });
+
 
     },
 
@@ -26,8 +34,17 @@ let board = {
     getBoardDetailData : function(selBrNo) {
         let url = '/board/'
         getDetailData(url, selBrNo)
+    },
 
+    updateBoard() {
+        let url = '/board';
+        const sendData = {};
+        sendData["brNo"] = document.querySelector('#brDtlBrNo').value;
+        sendData["title"] = document.querySelector('#brDtlTitle').value;
+        sendData["content"] = document.querySelector('#brDtlContent').value;
+        dataSendPost(url, sendData, "PUT");
     }
+
 };
 
 board.init();
@@ -35,17 +52,15 @@ board.init();
 async function getDetailData(url, brNo){
     fetch(url + (brNo == (undefined || null) ? '' : brNo))
     .then((res) => {
-        if(res.status != 200) return null;
-//        console.log("res :: ", res);
-//        console.log("res1111 :: ", res.html());
-        return res.text();
+        return res.status != 200 ? null : res.text();
     })
     .then((data) => {
-        console.log("data ::: ", data);
         document.querySelector("#testDiv").innerHTML = data;
+        btnChgFormFiled("detail");
     })
     .catch(err => {
-        console.log("err :: ", err);
+        errMsg(err);
+//        console.log("getDetailData :: err :: ", err);
     })
 }
 
@@ -60,11 +75,22 @@ async function dataSendPost(url, data, method) {
         },
         body : JSON.stringify(data)
         })
-        .then((res) => res.status === 200 ? window.location.href = "/" : errMsg(res) )
+        .then((res) => res.status === 200 ? pageReset(true) : errMsg(res) )
+}
+
+function pageReset(flag){
+    window.location.href = "/";
 }
 
 function errMsg(err) {
     alert("API 호출 실패");
     console.log("status code :: ", err.status);
     return null;
+}
+
+function btnChgFormFiled(flag){
+    document.getElementById("brDtlTitle").disabled = flag === "update" ? false : true;
+    document.getElementById("brDtlContent").disabled = flag === "update" ? false : true;
+    document.querySelector("#brUpdateBtn").style.display = flag === "update" ? "none" : "";
+    document.querySelector("#brUpdateSaveBtn").style.display = flag === "update" ? "" : "none";
 }
