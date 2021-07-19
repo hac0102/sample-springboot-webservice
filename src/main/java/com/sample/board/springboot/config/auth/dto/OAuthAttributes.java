@@ -32,9 +32,9 @@ public class OAuthAttributes {
     }
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
-//        if("naver".equals(registrationId)) {
-//            return ofNaver("id", attributes, registrationId);
-//        }
+        if("naver".equals(registrationId)) {
+            return ofNaver("id", attributes, registrationId);
+        }
 //
 //        if("Kakao".equals(registrationId)) {
 //            return ofKakao("id", attributes, registrationId);
@@ -61,19 +61,19 @@ public class OAuthAttributes {
                 .build();
     }
 
-//    private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes, String registrationId) {
-//        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
-//        log.info("네이버 로그인 정보 response :: {}",  response);
-//
-//        return OAuthAttributes.builder()
-//                .name((String) response.get("name"))
-//                .email((String) response.get("email"))
-//                .picture((String) response.get("profile_image"))
-//                .attributes(response)
-//                .nameAttributeKey(userNameAttributeName)
-//                .type(registrationId)
-//                .build();
-//    }
+    private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes, String registrationId) {
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        log.info("네이버 로그인 정보 response :: {}",  response);
+
+        return OAuthAttributes.builder()
+                .name((String) response.get("name"))
+                .email((String) response.get("email"))
+                .picture((String) response.get("profile_image"))
+                .attributes(response)
+                .nameAttributeKey(userNameAttributeName)
+                .type(registrationId)
+                .build();
+    }
 
     public UserDto toEntity() {
         return UserDto.builder()

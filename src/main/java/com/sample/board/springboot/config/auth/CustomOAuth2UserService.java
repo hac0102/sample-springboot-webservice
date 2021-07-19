@@ -22,6 +22,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 @Service
 @Slf4j
+@Transactional
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final UserMapper userMapper;
@@ -48,10 +49,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 attributes.getNameAttributeKey());
     }
 
-
-    private void setUserSession(UserDto user) {
-    }
-
     @Transactional
     private UserDto saveOrUdate(OAuthAttributes attributes) {
 //        UserDto userDto = userMapper.selectUserInfo(attributes.toEntity())
@@ -67,7 +64,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         userMapper.insertUserJoin(user);
         userMapper.insertUserJoinHistory(user);
-
         return user;
     }
 }

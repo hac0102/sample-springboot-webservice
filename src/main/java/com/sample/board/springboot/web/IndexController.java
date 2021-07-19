@@ -3,7 +3,6 @@ package com.sample.board.springboot.web;
 import com.sample.board.springboot.config.auth.LoginUser;
 import com.sample.board.springboot.config.auth.dto.SessionUser;
 import com.sample.board.springboot.service.board.BoardService;
-import com.sample.board.springboot.web.dto.user.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +32,12 @@ public class IndexController {
         mv.addObject("boardDataList", boardService.getBoardList());
         mv.addObject("userInfo", user);
         mv.setViewName("main");
+        return mv;
+    }
+
+    @GetMapping("/login2")
+    public ModelAndView login(ModelAndView mv){
+        mv.setViewName("login");
         return mv;
     }
 
