@@ -1,6 +1,6 @@
 <th:block th:fragment="f_content">
-    <section class="page-section portfolio" id="content">
-        <div class="container">
+    <section class="page-section portfolio" id="contentSection">
+        <div class="container" id="content">
             <!-- Portfolio Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">글 목 록</h2>
             <!-- Icon Divider-->
@@ -13,12 +13,13 @@
                 <div class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#boardWriteModal">글쓰기</div>
             </div>
             <!-- Portfolio Grid Items-->
-            <div class="row justify-content-center">
-                <table id="boardTable" class="table table-hover">
+            <div class="row justify-content-center" id="boardTableDiv">
+                <table class="table table-hover">
                     <colgroup>
                         <col style="width:10%;" />
                         <col style="width:auto;" />
-                        <col style="width:15%;" />
+                        <col style="width:13%;" />
+                        <col style="width:12%;" />
                         <col style="width:30%;" />
                     </colgroup>
                     <thead>
@@ -26,12 +27,13 @@
                             <th>글번호</th>
                             <th>제 목</th>
                             <th>작성자</th>
+                            <th>조회수</th>
                             <th>작성일</th>
                         </tr>
                     </thead>
-                    <tbody>
+                        <tbody id="boardTbody">
                         <tr th:if="${#lists.size(boardDataList) == 0}">
-                            <td colspan="4" align="center">데이터가 없습니다.</td>
+                            <td colspan="5" align="center">데이터가 없습니다.</td>
                         </tr>
                         <th:block th:unless="${#lists.size(boardDataList) == 0}">
                             <th:block th:each="board : ${boardDataList}">
@@ -39,11 +41,12 @@
                                     <td th:brNo="${board.brNo}" th:text="${board.brNo}" th:value="${board.brNo}"></td>
                                     <td th:text="${board.title}" th:value="${board.title}"></td>
                                     <td th:text="${board.name}" th:value="${board.name}"></td>
+                                    <td th:text="${board.reviewCount}" th:value="${board.reviewCount}"></td>
                                     <td th:text="${#temporals.format(board.frstRegDate, 'yyyy-MM-dd HH:mm:ss')}" th:value="${#temporals.format(board.frstRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 </tr>
                             </th:block>
                         </th:block>
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
         </div>

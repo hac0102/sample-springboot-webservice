@@ -29,6 +29,9 @@
                                             <div id="testDiv">
                                                 <div th:each="detail :${boardDetailData}">
                                                     <input type="hidden" id="brDtlBrNo" th:value="${detail.brNo}" />
+                                                    <div class="form-floating mb-3" style="text-align: left !important;">조회수
+                                                        <span th:text="${detail.reviewCount}"></span>
+                                                    </div>
                                                     <div class="form-floating mb-3">
                                                         <input class="form-control" id="brDtlTitle" type="text" th:value="${detail.title}" disabled="disabled"  />
                                                         <label for="brDtlTitle">제 목</label>

@@ -8,12 +8,11 @@ let board = {
             _this.insertBoard();
         });
 
-        document.querySelector("#boardTable").addEventListener('click', (e) => {
+        document.getElementById("boardTbody").addEventListener('click', (e) => {
             let el = document.querySelector("#boardTable");
             let selBrNo = e.target.closest("tr").getAttribute("selBrNo");
             if(selBrNo == null) return null;
-            _this.getBoardDetailData(selBrNo);
-
+            if(e.delegateTarget.closest("tr").hasAttribute("selBrNo")) _this.getBoardDetailData(selBrNo);
         }, false);
 
         document.querySelector("#boardDetailForm").addEventListener('click', (e) => {
@@ -77,11 +76,12 @@ let board = {
 board.init();
 
 async function getDetailData(url, brNo){
-    fetch(url + (brNo == (undefined || null) ? '' : brNo))
+     fetch(url + (brNo == (undefined || null) ? '' : brNo))
     .then((res) => {
         return res.status != 200 ? null : res.text();
     })
     .then((data) => {
+        reloadBoardList("/api/v1/board", "GET");
         document.querySelector("#testDiv").innerHTML = "";
         document.querySelector("#testDiv").innerHTML = data;
         btnChgFormFiled("detail");
@@ -105,6 +105,21 @@ async function dataSendPost(url, data, method) {
         .catch(err => errMsg(err))
 }
 
+async function reloadBoardList(url, data, method) {
+    await fetch(url)
+        .then((res) => {
+            return res.status != 200 ? null : res.text();
+        })
+        .then((data) => {
+            document.querySelector("#boardTbody").innerHTML = "";
+            document.querySelector("#boardTbody").innerHTML = data;
+        })
+        .catch(err => {
+            errMsg(err);
+    //        console.log("getDetailData :: err :: ", err);
+        })
+}
+
 function getBoardDetailFormData(){
     const formData = {};
     formData["brNo"] = document.querySelector('#brDtlBrNo').value;
@@ -114,7 +129,12 @@ function getBoardDetailFormData(){
 }
 
 function pageReset(flag){
-    window.location.href = "/";
+    setTimeout(function(){ document.getElementById("content").scrollIntoView(); }, 1000);
+    window.location.reload(true);
+//    window.location.href = "/";
+//    $("#content").load(window.location.href + "#content");
+//    document.getElementById("content").scrollIntoView();
+
 }
 
 function errMsg(err) {
