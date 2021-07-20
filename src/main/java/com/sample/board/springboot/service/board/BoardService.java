@@ -51,6 +51,7 @@ public class BoardService {
     public ModelAndView getBoardDetailData(int brNo, SessionUser userInfo) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("board/board_detail_modal :: #testDiv");
+        boardMapper.updateBoardReviewCount(brNo);
         mv.addObject("boardDetailData", boardMapper.selectBoardDetailData(brNo));
         mv.addObject("userInfo", userInfo);
         return mv;

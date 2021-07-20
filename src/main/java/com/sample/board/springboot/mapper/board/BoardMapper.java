@@ -20,4 +20,6 @@ public interface BoardMapper {
     int updateBoard(BoardRequestdDto boardRequestdDto);
 
     int deleteBoard(BoardRequestdDto boardRequestdDto);
+
+    void updateBoardReviewCount(int brNo);
 }

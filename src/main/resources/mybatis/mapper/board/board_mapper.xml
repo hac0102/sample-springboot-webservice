@@ -6,6 +6,7 @@
         <result column="br_no" property="brNo"></result>
         <result column="title" property="title"></result>
         <result column="content" property="content"></result>
+        <result column="review_count" property="reviewCount"></result>
         <result column="frst_reg_date" property="frstRegDate"></result>
         <result column="last_chg_date" property="lastChgDate"></result>
         <collection property="userDto" resultMap="UserDtoMap"></collection>
@@ -17,6 +18,13 @@
         <result column="name"  property="name"></result>
     </resultMap>
 
+    <update id="updateBoardReviewCount" parameterType="int">
+        update board
+        set
+            review_count = review_count + 1
+        where
+            br_no = #{brNo}
+    </update>
 
     <update id="deleteBoard" parameterType="com.sample.board.springboot.web.dto.board.BoardRequestdDto">
         update board
@@ -44,6 +52,7 @@
             a.br_no,
             b.user_no,
             b.name,
+            a.review_count,
             a.title,
             a.content,
             a.frst_reg_date,
@@ -101,6 +110,7 @@
             a.title,
             ifnull(b.name, '탈퇴사용자') name,
             a.del_yn,
+            a.review_count,
             a.frst_reg_date,
             a.last_chg_date
         from

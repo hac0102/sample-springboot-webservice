@@ -14,6 +14,7 @@ public class BoardListResponseDto {
     private String name;
     private String title;
     private String delYn;
+    private int reviewCount;
     private LocalDateTime frstRegDate;
     private LocalDateTime lastChgDate;
 }

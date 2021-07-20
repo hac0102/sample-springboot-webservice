@@ -17,11 +17,12 @@ public class Board {
     private String title;
     private String content;
     private String delYn;
+    private int reviewCount;
     private LocalDateTime frstRegDate;
     private LocalDateTime lastChgDate;
 
     @Builder
-    public Board(int brNo, int userNo, String name, UserDto userDto, String title, String content, String delYn, LocalDateTime frstRegDate, LocalDateTime lastChgDate) {
+    public Board(int brNo, int userNo, String name, UserDto userDto, String title, String content, String delYn, int reviewCount, LocalDateTime frstRegDate, LocalDateTime lastChgDate) {
         this.brNo = brNo;
         this.userDto = userDto;
 //        this.userNo = userNo;
@@ -29,6 +30,7 @@ public class Board {
         this.title = title;
         this.content = content;
         this.delYn = delYn;
+        this.reviewCount = reviewCount;
         this.frstRegDate = frstRegDate;
         this.lastChgDate = lastChgDate;
     }

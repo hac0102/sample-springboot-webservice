@@ -21,6 +21,7 @@ public class BoardController {
     public ModelAndView getBoardList() throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.addObject("boardDataList", boardService.getBoardList());
+        mv.setViewName("board/board_content :: #boardTbody");
         return mv;
     }
 
